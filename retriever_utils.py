@@ -10,7 +10,7 @@ from io import open
 from tqdm import tqdm
 from torch.utils.data import Dataset
 
-from transformers.tokenization_bert import BasicTokenizer, whitespace_tokenize
+# from transformers.tokenization_bert import BasicTokenizer, whitespace_tokenize
 
 from PIL import Image
 import cv2
@@ -324,14 +324,19 @@ class GenPassageRepDataset(Dataset):
 
 
         try:
-            img = cv2.imread(path)
-
-            img = Image.fromarray(img)
+            # img = cv2.imread(path)
+            # img = Image.fromarray(img)
+            img = Image.open(path).convert("RGB")
         except:
-            print('img path error')
-            img = Image.fromarray(cv2.imread("/home/share/liyongqi/project/MMCoQA/data/MMCoQA_data/final_data/multimodal_evidence_collection/images/final_dataset_images/0a0ec6d51bb5d9059e193af79d7f4139.jpg"))
-        img = trans_f(img)
-        img=img.numpy()
+            raise Exception("DataError: " + path)
+
+        try:
+            img = trans_f(img)
+        except:
+            print("Cannot transform ", path)
+            img = torch.zeros((3, 512, 512))
+
+        img = img.numpy()
         return img
                 
     def __len__(self):

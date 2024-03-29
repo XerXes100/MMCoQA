@@ -125,11 +125,12 @@ def compute_span_overlap(pred_span, gt_span, text):
     return 'No overlap', fscore
 
 
-def eval_fn(val_results, model_results, verbose):
+def eval_fn(dev_file, test_file, val_results, model_results, verbose):
 
 
   qid_modality={}
-  with open('/home/share/liyongqi/project/MMCoQA/data/MMCoQA_data/final_data/QA pairs/MMCoQA_test.txt', "r") as f:
+  # with open('/home/share/liyongqi/project/MMCoQA/data/MMCoQA_data/final_data/QA pairs/MMCoQA_test.txt', "r") as f:
+  with open(test_file, "r") as f:
       lines=f.readlines()
       for line in lines:
         json.loads(line.strip())
@@ -142,7 +143,9 @@ def eval_fn(val_results, model_results, verbose):
             modality_label=2
 
         qid_modality[entry["qid"]]=modality_label
-  with open('/home/share/liyongqi/project/MMCoQA/data/MMCoQA_data/final_data/QA pairs/MMCoQA_dev.txt', "r") as f:
+
+  # with open('/home/share/liyongqi/project/MMCoQA/data/MMCoQA_data/final_data/QA pairs/MMCoQA_dev.txt', "r") as f:
+  with open(dev_file, "r") as f:
       lines=f.readlines()
       for line in lines:
         json.loads(line.strip())
@@ -323,14 +326,14 @@ def eval_fn_for_sig_test(val_results, model_results, verbose):
 #   print("=======================")
   return metric_json, unfiltered_f1s, filtered_f1s
 
-def quac_eval(val_file, output_final_prediction_file):
-  parser = ArgumentParser()
-  parser.add_argument('--val_file', type=str, required=False, help='file containing validation results')
-  parser.add_argument('--model_output', type=str, required=False, help='Path to model output.')
-  parser.add_argument('--o', type=str, required=False, help='Path to save score json')
-  parser.add_argument('--min_f1', type=float, default=0.4, help='file containing validation results')
-  parser.add_argument('--verbose', action='store_true', help='print individual scores')
-  args, unknown = parser.parse_known_args()
+def quac_eval(args, val_file, output_final_prediction_file):
+  # parser = ArgumentParser()
+  # parser.add_argument('--val_file', type=str, required=False, help='file containing validation results')
+  # parser.add_argument('--model_output', type=str, required=False, help='Path to model output.')
+  # parser.add_argument('--o', type=str, required=False, help='Path to save score json')
+  # parser.add_argument('--min_f1', type=float, default=0.4, help='file containing validation results')
+  # parser.add_argument('--verbose', action='store_true', help='print individual scores')
+  # args, unknown = parser.parse_known_args()
 
   with open(val_file, "r") as f:
       val=f.readlines()
@@ -350,10 +353,10 @@ def quac_eval(val_file, output_final_prediction_file):
   #     did = par['id']
   #     qa_list = par['qas']
   #     val_total += len(qa_list)
-  metric_json = eval_fn(val, preds, args.verbose)
-  if args.o:
-    with open(args.o, 'w') as fout:
-      json.dump(metric_json, fout)
+  metric_json = eval_fn(args.dev_file, args.test_file, val, preds, True)
+  # if args.o:
+  #   with open(args.o, 'w') as fout:
+  #     json.dump(metric_json, fout)
     
   return metric_json
 

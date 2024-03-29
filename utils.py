@@ -28,7 +28,8 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import Dataset
 
-from transformers.tokenization_bert import BasicTokenizer, whitespace_tokenize
+# from transformers.tokenization_bert import BasicTokenizer, whitespace_tokenize
+from transformers.models.bert.tokenization_bert import BasicTokenizer, whitespace_tokenize
 
 from PIL import Image
 import cv2
@@ -679,8 +680,9 @@ def image_transform(path):  ###下面还有一个_image_transform方法，要改
     im = im[:, :, ::-1]
     im -= np.array([102.9801, 115.9465, 122.7717])
 
-    img = cv2.imread(path)
-    img = Image.fromarray(img)
+    # img = cv2.imread(path)
+    # img = Image.fromarray(img)
+    img = Image.open(path).convert("RGB")
     img = trans_f(img)
     img=img.numpy()
     return img

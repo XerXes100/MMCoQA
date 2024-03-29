@@ -3,10 +3,10 @@ import logging
 import collections
 import torch
 from transformers import BertModel, BertPreTrainedModel, AlbertModel
-from transformers.modeling_bert import (BertEncoder, BertOutput, BertAttention, 
+from transformers.models.bert.modeling_bert import (BertEncoder, BertOutput, BertAttention, 
                                         BertIntermediate, BertLayer, BertEmbeddings,
-                                        BertPooler, BertLayerNorm)
-from transformers.modeling_albert import AlbertPreTrainedModel
+                                        BertPooler, )
+from transformers.models.albert import AlbertPreTrainedModel
 
 from torch import nn
 from torch.nn import CrossEntropyLoss
