@@ -1,6 +1,11 @@
 final_dataset_images/
 final_dataset_images.zip
 retriever_release_test/
+retriever_release_test.zip
+retriever_checkpoint.zip
+retriever_checkpoint/
+release_test.zip
+release_test/
 multimodalqa_final_dataset_pipeline_camera_ready_MMQA_texts.jsonl
 multimodalqa_final_dataset_pipeline_camera_ready_MMQA_images.jsonl
 multimodalqa_final_dataset_pipeline_camera_ready_MMQA_tables.jsonl
