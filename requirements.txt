@@ -1,20 +1,11 @@
-# faiss-cpu
-# packaging
-# tqdm
-# pytrec_eval
-# scipy
-# torch
-# tensorboardX
-# transformers
-# torchvision
-# apex
-# sentencepience
-
-pytorch == 1.8.0
-pytrec-eval == 0.5
-faiss-gpu == 1.7.0
-transformers == 2.3.0
-tensorboard == 2.6.0
-tqdm == 4.59.0
-numpy == 1.19.2
-scipy == 1.6.2
+faiss-gpu
+numpy
+pandas
+pytrec_eval
+transformers==4.17
+scipy
+opencv-python
+tensorboardX
+torch
+torchvision
+sentencepiece
