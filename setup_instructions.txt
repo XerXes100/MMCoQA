@@ -13,6 +13,9 @@ python3 -c 'import torch; print(torch.cuda.is_available())'
 # Add path
 export PATH="$PATH:/home/tirthgcp/.local/bin"
 
+# ERROR:root:aplay command not found
+sudo apt-get install alsa-utils
+
 # gdown commands to download the files
 gdown 1pqhItU4iv5seAdFaCay-7YcC0MebgOyI
 gdown 1xPtlW9vmWFdIrO3HFP2yG56Fi41g37W1
